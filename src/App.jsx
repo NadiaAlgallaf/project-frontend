@@ -11,6 +11,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import { useAuth } from './context/AuthContext'
 import AllJobs from './pages/AllJobs'
 import JobDetails from './pages/JobDetails'
+import CreateJob from './pages/CreateJob'
 
 function App() {
   return (
@@ -32,6 +33,15 @@ function App() {
         <Route path="/jobs" element={<AllJobs />} />
 
         <Route path="/jobs/:id" element={<JobDetails />} />
+
+        <Route
+          path="/jobs/create"
+          element={
+            <ProtectedRoute>
+              <CreateJob />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   )
