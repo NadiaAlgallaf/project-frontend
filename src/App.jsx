@@ -9,9 +9,9 @@ import { useEffect } from 'react'
 import { getCurrentUser, logout } from './services/authService'
 import ProtectedRoute from './components/ProtectedRoute'
 import { useAuth } from './context/AuthContext'
-import AllJobs from './pages/AllJobs'
-import JobDetails from './pages/JobDetails'
-import CreateJob from './pages/CreateJob'
+import AllJobs from './pages/Jobs/AllJobs'
+import JobDetails from './pages/Jobs/JobDetails'
+import CreateJob from './pages/Jobs/CreateJob'
 
 function App() {
   return (

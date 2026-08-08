@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getAllJobs } from '../services/jobService'
+import { getAllJobs } from '../../services/jobService.js'
 import { Link } from 'react-router'
 
 function Jobs() {

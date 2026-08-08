@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
-import { getJob } from '../services/jobService'
+import { getJob } from '../../services/jobService.js'
 
 function JobDetails() {
   const [job, setJob] = useState(null)

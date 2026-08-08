@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router'
-import { createJob } from '../services/jobService'
+import { createJob } from '../../services/jobService.js'
 
 function CreateJob() {
   const navigate = useNavigate()
