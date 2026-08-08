@@ -1,38 +1,69 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router'
-import { signUp } from '../services/authService'
+import { useState } from "react";
+import { useNavigate } from "react-router";
+import { signUp } from "../services/authService";
 
 function Signup() {
-  const navigate = useNavigate()
-  const [error, setError] = useState('')
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    passwordConf: '',
-    role: '',
-    phone: ''
-  })
-  const [submitting, setSubmitting] = useState(false)
+  const navigate = useNavigate();
 
-  const { firstName, lastName, email, password, passwordConf, role, phone } =
-    formData
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    passwordConf: "",
+    role: "",
+    phone: "",
+  });
+
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    passwordConf,
+    role,
+    phone,
+  } = formData;
 
   function handleChange(event) {
-    setError('')
-    setFormData({ ...formData, [event.target.name]: event.target.value })
+    setError("");
+
+    setFormData({
+      ...formData,
+      [event.target.name]: event.target.value,
+    });
   }
 
   async function handleSubmit(event) {
-    event.preventDefault()
+    event.preventDefault();
+
+    if (password !== passwordConf) {
+      setError("Passwords do not match.");
+      return;
+    }
+
     try {
-      setSubmitting(true)
-      await signUp(formData)
-      navigate('/sign-in')
+      setSubmitting(true);
+
+      // Don't send passwordConf to the backend
+      const { passwordConf, ...signupData } = formData;
+
+      await signUp(signupData);
+
+      // Signup successful → go to Sign In
+      navigate("/sign-in");
     } catch (err) {
-      setError(err.response.data.message)
-      setSubmitting(false)
+      console.log("Sign up error:", err);
+
+      setError(
+        err?.response?.data?.message ||
+          "Unable to create account. Please try again."
+      );
+
+      setSubmitting(false);
     }
   }
 
@@ -45,16 +76,19 @@ function Signup() {
       passwordConf &&
       role &&
       password === passwordConf
-    )
+    );
   }
 
   return (
     <main>
       <h1>Sign Up</h1>
-      <p className="error">{error}</p>
+
+      {error && <p className="error">{error}</p>}
+
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="firstName">First Name: </label>
+
           <input
             type="text"
             id="firstName"
@@ -67,6 +101,7 @@ function Signup() {
 
         <div>
           <label htmlFor="lastName">Last Name: </label>
+
           <input
             type="text"
             id="lastName"
@@ -79,6 +114,7 @@ function Signup() {
 
         <div>
           <label htmlFor="email">Email: </label>
+
           <input
             type="email"
             id="email"
@@ -91,6 +127,7 @@ function Signup() {
 
         <div>
           <label htmlFor="phone">Phone: </label>
+
           <input
             type="text"
             id="phone"
@@ -118,34 +155,48 @@ function Signup() {
 
         <div>
           <label htmlFor="password">Password:</label>
+
           <input
             type="password"
             id="password"
-            value={password}
             name="password"
+            value={password}
             onChange={handleChange}
             required
           />
         </div>
+
         <div>
           <label htmlFor="confirm">Confirm Password:</label>
+
           <input
             type="password"
             id="confirm"
-            value={passwordConf}
             name="passwordConf"
+            value={passwordConf}
             onChange={handleChange}
             required
           />
         </div>
+
         <div>
-          <button disabled={isFormInvalid() || submitting}>
-            {submitting ? 'Signing up...' : 'Sign Up'}
+          <button
+            type="submit"
+            disabled={isFormInvalid() || submitting}
+          >
+            {submitting ? "Signing up..." : "Sign Up"}
           </button>
-          <button onClick={() => navigate('/')}>Cancel</button>
+
+          <button
+            type="button"
+            onClick={() => navigate("/")}
+          >
+            Cancel
+          </button>
         </div>
       </form>
     </main>
-  )
+  );
 }
-export default Signup
+
+export default Signup;
