@@ -16,7 +16,7 @@ async function createJob(body) {
 }
 
 async function updateJob(id, body) {
-  const response = await api.put(`/jobs/${id}`, body)
+  const response = await api.patch(`/jobs/${id}`, body)
   return response.data.job
 }
 
