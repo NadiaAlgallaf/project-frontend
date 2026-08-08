@@ -12,6 +12,7 @@ import { useAuth } from './context/AuthContext'
 import AllJobs from './pages/Jobs/AllJobs'
 import JobDetails from './pages/Jobs/JobDetails'
 import CreateJob from './pages/Jobs/CreateJob'
+import EditJob from './pages/Jobs/EditJob'
 
 function App() {
   return (
@@ -39,6 +40,15 @@ function App() {
           element={
             <ProtectedRoute>
               <CreateJob />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/jobs/:id/edit"
+          element={
+            <ProtectedRoute>
+              <EditJob />
             </ProtectedRoute>
           }
         />
