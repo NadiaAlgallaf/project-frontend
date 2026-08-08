@@ -1,41 +1,52 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
-import { signUp } from "../services/authService";
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { signUp } from '../services/authService'
 
 function Signup() {
-  const navigate = useNavigate();
-  const [error, setError] = useState("");
+  const navigate = useNavigate()
+  const [error, setError] = useState('')
   const [formData, setFormData] = useState({
-    username: "",
-    password: "",
-    passwordConf: "",
-  });
-  const [ submitting, setSubmitting ] = useState(false)
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    passwordConf: '',
+    role: '',
+    phone: ''
+  })
+  const [submitting, setSubmitting] = useState(false)
 
-  const { username, password, passwordConf } = formData;
+  const { firstName, lastName, email, password, passwordConf, role, phone } =
+    formData
 
-  function handleChange(event){
-    setError("");
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-
+  function handleChange(event) {
+    setError('')
+    setFormData({ ...formData, [event.target.name]: event.target.value })
   }
 
-
-  async function handleSubmit(event){
-    event.preventDefault();
+  async function handleSubmit(event) {
+    event.preventDefault()
     try {
       setSubmitting(true)
-      await signUp(formData);
+      await signUp(formData)
       navigate('/sign-in')
     } catch (err) {
-      setError(err.response.data.message);
+      setError(err.response.data.message)
       setSubmitting(false)
     }
   }
 
-  function isFormInvalid(){
-    return !(username && password && password === passwordConf);
-  };
+  function isFormInvalid() {
+    return !(
+      firstName &&
+      lastName &&
+      email &&
+      password &&
+      passwordConf &&
+      role &&
+      password === passwordConf
+    )
+  }
 
   return (
     <main>
@@ -43,16 +54,68 @@ function Signup() {
       <p className="error">{error}</p>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label htmlFor="firstName">First Name: </label>
           <input
             type="text"
-            id="username"
-            value={username}
-            name="username"
+            id="firstName"
+            name="firstName"
+            value={firstName}
             onChange={handleChange}
             required
           />
         </div>
+
+        <div>
+          <label htmlFor="lastName">Last Name: </label>
+          <input
+            type="text"
+            id="lastName"
+            name="lastName"
+            value={lastName}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="email">Email: </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="phone">Phone: </label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={phone}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="role">Role: </label>
+
+          <select
+            id="role"
+            name="role"
+            value={role}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Role</option>
+            <option value="JobSeeker">Job Seeker</option>
+            <option value="Employer">Employer</option>
+          </select>
+        </div>
+
         <div>
           <label htmlFor="password">Password:</label>
           <input
@@ -76,11 +139,13 @@ function Signup() {
           />
         </div>
         <div>
-          <button disabled={isFormInvalid() || submitting}>{submitting ? 'Signing up...' : 'Sign Up'}</button>
-          <button onClick={() => navigate("/")}>Cancel</button>
+          <button disabled={isFormInvalid() || submitting}>
+            {submitting ? 'Signing up...' : 'Sign Up'}
+          </button>
+          <button onClick={() => navigate('/')}>Cancel</button>
         </div>
       </form>
     </main>
-  );
+  )
 }
-export default Signup;
+export default Signup
