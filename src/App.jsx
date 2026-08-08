@@ -12,6 +12,8 @@ import JobDetails from "./pages/Jobs/JobDetails";
 import CreateJob from "./pages/Jobs/CreateJob";
 import EditJob from "./pages/Jobs/EditJob";
 
+import EmployerRoute from "./components/EmployerRoute";
+
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -30,12 +32,7 @@ function App() {
         {/* Protected Dashboard */}
         <Route
           path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
+          element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
 
         {/* Public Job routes */}
         <Route path="/jobs" element={<AllJobs />} />
@@ -43,23 +40,10 @@ function App() {
         <Route path="/jobs/:id" element={<JobDetails />} />
 
         {/* Protected Job routes */}
-        <Route
-          path="/jobs/create"
-          element={
-            <ProtectedRoute>
-              <CreateJob />
-            </ProtectedRoute>
-          }
-        />
+       <Route path="/jobs/create" element={<EmployerRoute> <CreateJob /> </EmployerRoute>}/>
 
-        <Route
-          path="/jobs/:id/edit"
-          element={
-            <ProtectedRoute>
-              <EditJob />
-            </ProtectedRoute>
-          }
-        />
+
+        <Route path="/jobs/:id/edit" element={ <ProtectedRoute> <EditJob /> </ProtectedRoute>}/>
       </Routes>
     </div>
   );
