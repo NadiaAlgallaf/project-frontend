@@ -5,6 +5,7 @@ import { useAuth } from "../../context/AuthContext";
 
 function JobDetails() {
   const [job, setJob] = useState(null);
+  const [error, setError] = useState("");
 
   const { id } = useParams();
   const navigate = useNavigate();
@@ -13,16 +14,35 @@ function JobDetails() {
 
   async function loadJob() {
     try {
+      setError("");
+
       const data = await getJob(id);
+
       setJob(data);
     } catch (error) {
       console.log(error);
+
+      setError(
+        error?.response?.data?.message ||
+          "Unable to load this job."
+      );
     }
   }
 
   useEffect(() => {
     loadJob();
   }, [id]);
+
+  if (error) {
+    return (
+      <div>
+        <h2>Unable to load job</h2>
+        <p>{error}</p>
+
+        <Link to="/jobs">Back to Jobs</Link>
+      </div>
+    );
+  }
 
   if (!job) {
     return <p>Loading...</p>;
@@ -31,13 +51,18 @@ function JobDetails() {
   async function handleDelete() {
     try {
       await deleteJob(id);
+
       navigate("/jobs");
     } catch (error) {
       console.log(error);
+
+      setError(
+        error?.response?.data?.message ||
+          "Unable to delete this job."
+      );
     }
   }
 
-  // Check whether the logged-in user owns this job
   const isOwner =
     user &&
     job.createdBy &&
@@ -61,9 +86,9 @@ function JobDetails() {
 
       {isOwner && (
         <div>
-          <Link to={`/jobs/${job._id}/edit`}> Edit</Link>
+          <Link to={`/jobs/${job._id}/edit`}> Edit </Link>
 
-          <button onClick={handleDelete}> Delete</button>
+          <button onClick={handleDelete}> Delete </button>
         </div>
       )}
     </div>

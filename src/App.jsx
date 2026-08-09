@@ -43,7 +43,7 @@ function App() {
        <Route path="/jobs/create" element={<EmployerRoute> <CreateJob /> </EmployerRoute>}/>
 
 
-        <Route path="/jobs/:id/edit" element={ <ProtectedRoute> <EditJob /> </ProtectedRoute>}/>
+        <Route path="/jobs/:id/edit" element={ <EmployerRoute> <EditJob /> </EmployerRoute>}/>
       </Routes>
     </div>
   );
