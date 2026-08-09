@@ -1,20 +1,24 @@
-import { Routes, Route } from "react-router";
+import { Routes, Route } from 'react-router'
 
-import Navbar from "./components/Navbar";
+import Navbar from './components/Navbar'
 
-import SignupPage from "./pages/SignupPage";
-import Homepage from "./pages/Homepage";
-import SignInPage from "./pages/SigninPage";
-import Dashboard from "./pages/Dashboard";
+import SignupPage from './pages/SignupPage'
+import Homepage from './pages/Homepage'
+import SignInPage from './pages/SigninPage'
+import Dashboard from './pages/Dashboard'
 
-import AllJobs from "./pages/Jobs/AllJobs";
-import JobDetails from "./pages/Jobs/JobDetails";
-import CreateJob from "./pages/Jobs/CreateJob";
-import EditJob from "./pages/Jobs/EditJob";
+import AllJobs from './pages/Jobs/AllJobs'
+import JobDetails from './pages/Jobs/JobDetails'
+import CreateJob from './pages/Jobs/CreateJob'
+import EditJob from './pages/Jobs/EditJob'
 
-import EmployerRoute from "./components/EmployerRoute";
+import MyApplications from './pages/Application/MyApplications'
 
-import ProtectedRoute from "./components/ProtectedRoute";
+import EmployerRoute from './components/EmployerRoute'
+
+import JobSeekerRoute from './components/JobSeekerRoute'
+
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -32,7 +36,13 @@ function App() {
         {/* Protected Dashboard */}
         <Route
           path="/dashboard"
-          element={ <ProtectedRoute> <Dashboard /> </ProtectedRoute>} />
+          element={
+            <ProtectedRoute>
+              {' '}
+              <Dashboard />{' '}
+            </ProtectedRoute>
+          }
+        />
 
         {/* Public Job routes */}
         <Route path="/jobs" element={<AllJobs />} />
@@ -40,13 +50,37 @@ function App() {
         <Route path="/jobs/:id" element={<JobDetails />} />
 
         {/* Protected Job routes */}
-       <Route path="/jobs/create" element={<EmployerRoute> <CreateJob /> </EmployerRoute>}/>
+        <Route
+          path="/jobs/create"
+          element={
+            <EmployerRoute>
+              {' '}
+              <CreateJob />{' '}
+            </EmployerRoute>
+          }
+        />
 
+        <Route
+          path="/jobs/:id/edit"
+          element={
+            <EmployerRoute>
+              {' '}
+              <EditJob />{' '}
+            </EmployerRoute>
+          }
+        />
 
-        <Route path="/jobs/:id/edit" element={ <EmployerRoute> <EditJob /> </EmployerRoute>}/>
+        <Route
+          path="applications/my-applications"
+          element={
+            <JobSeekerRoute>
+              <MyApplications />
+            </JobSeekerRoute>
+          }
+        />
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
