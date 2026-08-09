@@ -11,6 +11,7 @@ import AllJobs from './pages/Jobs/AllJobs'
 import JobDetails from './pages/Jobs/JobDetails'
 import CreateJob from './pages/Jobs/CreateJob'
 import EditJob from './pages/Jobs/EditJob'
+import MyJobs from './pages/Jobs/MyJobs'
 
 import MyApplications from './pages/Application/MyApplications'
 
@@ -66,6 +67,15 @@ function App() {
             <EmployerRoute>
               {' '}
               <EditJob />{' '}
+            </EmployerRoute>
+          }
+        />
+
+        <Route
+          path="/my-jobs"
+          element={
+            <EmployerRoute>
+              <MyJobs />
             </EmployerRoute>
           }
         />

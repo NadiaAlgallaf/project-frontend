@@ -24,5 +24,9 @@ async function deleteJob(id) {
   const response = await api.delete(`/jobs/${id}`)
   return response.data
 }
+async function getMyJobs() {
+  const response = await api.get('/jobs/my-jobs')
+  return response.data
+}
 
-export { getAllJobs, getJob, createJob, updateJob, deleteJob }
+export { getAllJobs, getJob, createJob, updateJob, deleteJob, getMyJobs }
