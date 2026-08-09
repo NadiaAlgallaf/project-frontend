@@ -25,6 +25,7 @@ function Navbar() {
           {user.role === 'Employer' && (
             <>
               <Link to="/jobs/create">Post a Job</Link>
+              <Link to="/my-jobs">My Jobs</Link>
             </>
           )}
           <button onClick={logout}>Sign Out</button>
