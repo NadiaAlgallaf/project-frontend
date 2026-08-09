@@ -1,37 +1,35 @@
-import { useState, useEffect } from "react";
-import { useParams, Link, useNavigate } from "react-router";
-import { getJob, deleteJob } from "../../services/jobService.js";
-import { useAuth } from "../../context/AuthContext";
+import { useState, useEffect } from 'react'
+import { useParams, Link, useNavigate } from 'react-router'
+import { getJob, deleteJob } from '../../services/jobService.js'
+import { useAuth } from '../../context/AuthContext'
+import { createApplication } from '../../services/ApplicationService.js'
 
 function JobDetails() {
-  const [job, setJob] = useState(null);
-  const [error, setError] = useState("");
+  const [job, setJob] = useState(null)
+  const [error, setError] = useState('')
 
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams()
+  const navigate = useNavigate()
 
-  const { user } = useAuth();
+  const { user } = useAuth()
 
   async function loadJob() {
     try {
-      setError("");
+      setError('')
 
-      const data = await getJob(id);
+      const data = await getJob(id)
 
-      setJob(data);
+      setJob(data)
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
-      setError(
-        error?.response?.data?.message ||
-          "Unable to load this job."
-      );
+      setError(error?.response?.data?.message || 'Unable to load this job.')
     }
   }
 
   useEffect(() => {
-    loadJob();
-  }, [id]);
+    loadJob()
+  }, [id])
 
   if (error) {
     return (
@@ -41,32 +39,37 @@ function JobDetails() {
 
         <Link to="/jobs">Back to Jobs</Link>
       </div>
-    );
+    )
   }
 
   if (!job) {
-    return <p>Loading...</p>;
+    return <p>Loading...</p>
   }
 
   async function handleDelete() {
     try {
-      await deleteJob(id);
+      await deleteJob(id)
 
-      navigate("/jobs");
+      navigate('/jobs')
     } catch (error) {
-      console.log(error);
+      console.log(error)
 
-      setError(
-        error?.response?.data?.message ||
-          "Unable to delete this job."
-      );
+      setError(error?.response?.data?.message || 'Unable to delete this job.')
+    }
+  }
+
+  async function handleApply() {
+    try {
+      await createApplication(job._id)
+      alert('Application submitted')
+      navigate('/jobs')
+    } catch (error) {
+      console.log(error)
     }
   }
 
   const isOwner =
-    user &&
-    job.createdBy &&
-    job.createdBy.toString() === user._id.toString();
+    user && job.createdBy && job.createdBy.toString() === user._id.toString()
 
   return (
     <div>
@@ -84,6 +87,8 @@ function JobDetails() {
 
       <p>{job.jobDescription}</p>
 
+      <button onClick={handleApply}> Apply </button>
+
       {isOwner && (
         <div>
           <Link to={`/jobs/${job._id}/edit`}> Edit </Link>
@@ -92,7 +97,7 @@ function JobDetails() {
         </div>
       )}
     </div>
-  );
+  )
 }
 
-export default JobDetails;
+export default JobDetails

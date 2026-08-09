@@ -13,9 +13,13 @@ function Navbar() {
           <Link to="/dashboard">Dashboard</Link>
 
           {/* JobSeeker pages         */}
-          {/* {user.role === 'JobSeeker' && (
-
-          )} */}
+          {user.role === 'JobSeeker' && (
+            <>
+              <Link to="/applications/my-applications">
+                My job applications
+              </Link>
+            </>
+          )}
 
           {/* Employer pages */}
           {user.role === 'Employer' && (
