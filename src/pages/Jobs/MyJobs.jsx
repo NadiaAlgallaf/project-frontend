@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { getMyJobs } from '../../services/jobService'
 
 function MyJobs() {
   const [jobs, setJobs] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   async function loadJobs() {
     try {
@@ -46,6 +47,10 @@ function MyJobs() {
           <p>{job.location}</p>
           <p>{job.jobType}</p>
           <p>Applicants: {job.applicationCount}</p>
+
+          <button onClick={() => navigate(`/jobs/${job._id}/applications`)}>
+            View Applications
+          </button>
 
           <Link to={`/jobs/${job._id}`}>View</Link>
 
