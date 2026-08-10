@@ -39,8 +39,7 @@ function App() {
           path="/dashboard"
           element={
             <ProtectedRoute>
-              {' '}
-              <Dashboard />{' '}
+              <Dashboard />
             </ProtectedRoute>
           }
         />
@@ -55,8 +54,7 @@ function App() {
           path="/jobs/create"
           element={
             <EmployerRoute>
-              {' '}
-              <CreateJob />{' '}
+              <CreateJob />
             </EmployerRoute>
           }
         />
@@ -65,8 +63,7 @@ function App() {
           path="/jobs/:id/edit"
           element={
             <EmployerRoute>
-              {' '}
-              <EditJob />{' '}
+              <EditJob />
             </EmployerRoute>
           }
         />

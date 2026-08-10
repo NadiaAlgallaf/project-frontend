@@ -15,9 +15,7 @@ function Navbar() {
           {/* JobSeeker pages         */}
           {user.role === 'JobSeeker' && (
             <>
-              <Link to="/applications/my-applications">
-                My job applications
-              </Link>
+              <Link to="/my-applications">My job applications</Link>
             </>
           )}
 
