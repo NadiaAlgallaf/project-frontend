@@ -59,14 +59,25 @@ function JobDetails() {
   }
 
   async function handleApply() {
-    try {
-      await createApplication(job._id)
-      alert('Application submitted')
-      navigate('/jobs')
-    } catch (error) {
-      console.log(error)
-    }
+   const resumeUrl = window.prompt("please enter your resume URL")
+   if(!resumeUrl){
+    return
+   }
+    try{
+await createApplication(job._id, resumeUrl)
+alert("Application submitted successfully")
+
+navigate("/my-applications")
+
+  }catch(error){
+    console.log(error)
+
+    setError(
+      error?.response?.data?.message || 
+      "Unable to submit application."
+    )
   }
+}
 
   const isOwner =
     user && job.createdBy && job.createdBy.toString() === user._id.toString()

@@ -1,9 +1,9 @@
 import api from './api'
 
-async function createApplication(jobId) {
+async function createApplication(jobId, resumeUrl) {
   const response = await api.post('/applications', {
     job: jobId,
-    resumeUrl: resumeUrl
+    resumeUrl 
   })
   return response.data
 }
