@@ -73,20 +73,12 @@ function App() {
 
         <Route
           path="/my-jobs"
-          element={
-            <EmployerRoute>
-              <MyJobs />
-            </EmployerRoute>
-          }
+          element={ <EmployerRoute> <MyJobs /></EmployerRoute> }
         />
 
         <Route
           path="applications/my-applications"
-          element={
-            <JobSeekerRoute>
-              <MyApplications />
-            </JobSeekerRoute>
-          }
+          element={ <ProtectedRoute> <MyApplications /></ProtectedRoute> }
         />
       </Routes>
     </div>
