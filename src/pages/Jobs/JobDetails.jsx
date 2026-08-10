@@ -67,7 +67,7 @@ function JobDetails() {
 await createApplication(job._id, resumeUrl)
 alert("Application submitted successfully")
 
-navigate("/my-applications")
+navigate('/my-applications')
 
   }catch(error){
     console.log(error)
