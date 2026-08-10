@@ -77,7 +77,7 @@ function App() {
         />
 
         <Route
-          path="applications/my-applications"
+          path="/my-applications"
           element={ <ProtectedRoute> <MyApplications /></ProtectedRoute> }
         />
       </Routes>
