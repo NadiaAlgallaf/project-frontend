@@ -86,8 +86,11 @@ function JobDetails() {
       <h3>Description</h3>
 
       <p>{job.jobDescription}</p>
-
-      <button onClick={handleApply}> Apply </button>
+      
+{user?.role === "JobSeeker" && (
+  <button onClick={handleApply}> Apply </button>
+)}
+      
 
       {isOwner && (
         <div>
