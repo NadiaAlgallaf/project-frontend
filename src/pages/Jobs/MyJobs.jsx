@@ -45,6 +45,7 @@ function MyJobs() {
           <p>{job.companyName}</p>
           <p>{job.location}</p>
           <p>{job.jobType}</p>
+          <p>Applicants: {job.applicationCount}</p>
 
           <Link to={`/jobs/${job._id}`}>View</Link>
 
