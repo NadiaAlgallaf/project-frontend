@@ -18,4 +18,23 @@ async function withdrawApplication(ApplicationId) {
   return response.data
 }
 
-export { createApplication, getMyApplications, withdrawApplication }
+async function getJobApplications(jobId) {
+  const response = await api.get(`/applications/job/${jobId}`)
+  return response.data
+}
+
+async function updateApplicationStatus(id, status) {
+  const response = await api.put(`/applications/${id}/status`, {
+    status: status
+  })
+
+  return response.data
+}
+
+export {
+  createApplication,
+  getMyApplications,
+  withdrawApplication,
+  getJobApplications,
+  updateApplicationStatus
+}
