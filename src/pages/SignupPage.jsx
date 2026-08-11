@@ -16,6 +16,7 @@ function Signup() {
     passwordConf: "",
     role: "",
     phone: "",
+    companyLogo: ""
   });
 
   const {
@@ -26,6 +27,7 @@ function Signup() {
     passwordConf,
     role,
     phone,
+    companyLogo
   } = formData;
 
   function handleChange(event) {
@@ -43,6 +45,11 @@ function Signup() {
     if (password !== passwordConf) {
       setError("Passwords do not match.");
       return;
+    }
+
+    if (role === "Employer" && !companyLogo){
+      setError("Company logo URL is required for Employers.")
+      return
     }
 
     try {
@@ -77,8 +84,16 @@ function Signup() {
       role &&
       password === passwordConf
     );
-  }
+  
+if (basicFieldsInvalid){
+  return true
+}
 
+if ( role === "Employer" && !companyLogo){
+  return true;
+}
+return false 
+}
   return (
     <main>
       <h1>Sign Up</h1>
@@ -152,6 +167,21 @@ function Signup() {
             <option value="Employer">Employer</option>
           </select>
         </div>
+
+        {role === "Employer" && (
+          <div>
+            <label htmlFor="companyLogo">Company Logo URL : </label>
+
+            <input type="url" 
+            id="companyLogo"
+            name="companyLogo"
+            value={companyLogo}
+            onChange={handleChange}
+            placeholder="https://example.com/logo.png"
+            required
+            />
+          </div>
+        )}
 
         <div>
           <label htmlFor="password">Password:</label>
