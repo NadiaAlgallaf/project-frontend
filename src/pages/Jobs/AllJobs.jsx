@@ -154,6 +154,15 @@ function AllJobs() {
       ) : (
         jobs.map((job) => (
           <div key={job._id}>
+  {job.createdBy?.companyLogo && (
+    <img
+      src={job.createdBy.companyLogo}
+      alt={`${job.companyName} logo`}
+      width="100"
+      height="100"
+    />
+  )}
+
             <h2>{job.jobTitle}</h2>
 
             <p>{job.companyName}</p>
