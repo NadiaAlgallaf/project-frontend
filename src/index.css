@@ -1,7 +1,4 @@
-.error{
-    color: red
-}
-
-nav a{
-    margin-right: 10px
+.navbar-logo {
+  width: 150px;
+  height: auto;
 }

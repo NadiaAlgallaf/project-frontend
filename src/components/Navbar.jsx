@@ -1,10 +1,12 @@
 import { Link } from 'react-router'
 import { useAuth } from '../context/AuthContext'
+import logo from '../assets/logo.png'
 
 function Navbar() {
   const { logout, user } = useAuth()
   return (
     <nav>
+      <img src={logo} alt="CareerConnect Logo" className="navbar-logo" />
       <Link to="/">Home</Link>
       <Link to="/jobs">Jobs</Link>
 
@@ -15,9 +17,7 @@ function Navbar() {
           {/* JobSeeker pages         */}
           {user.role === 'JobSeeker' && (
             <>
-              <Link to="/my-applications">
-                My job applications
-              </Link>
+              <Link to="/my-applications">My job applications</Link>
             </>
           )}
 
