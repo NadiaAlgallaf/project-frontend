@@ -59,6 +59,20 @@ function MyApplications() {
 
           <p>Location: {application.job.location}</p>
 
+          <div>
+            <p>
+              Interview Date:{' '}
+              {new Date(application.interviewDate).toLocaleDateString()}
+            </p>
+            <p>
+              Interview Time:{' '}
+              {new Date(application.interviewDate).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit'
+              })}
+            </p>
+          </div>
+
           <button onClick={() => handleWithdraw(application._id)}>
             Withdraw
           </button>
