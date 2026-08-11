@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
 import {
   getJobApplications,
-  updateApplicationStatus
+  updateApplicationStatus,
+  updateInterviewDate
 } from '../../services/ApplicationService.js'
 
 function ViewApplications() {
@@ -11,6 +12,7 @@ function ViewApplications() {
   const [applications, setApplications] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const [interviewDate, setInterviewDate] = useState('')
 
   async function loadApplications() {
     try {
@@ -30,6 +32,15 @@ function ViewApplications() {
       await updateApplicationStatus(id, status)
 
       loadApplications()
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async function handleInterviewDate(applicationId) {
+    try {
+      await updateInterviewDate(applicationId, interviewDate)
+      alert('Interview date saved')
     } catch (error) {
       console.log(error)
     }
@@ -71,6 +82,21 @@ function ViewApplications() {
             <button onClick={() => handleStatus(application._id, 'Interview')}>
               Interview
             </button>
+
+            {application.status === 'Interview' && (
+              <div>
+                <label>Interview Date:</label>
+
+                <input
+                  type="datetime-local"
+                  onChange={(event) => setInterviewDate(event.target.value)}
+                />
+
+                <button onClick={() => handleInterviewDate(application._id)}>
+                  Save Date
+                </button>
+              </div>
+            )}
 
             <button onClick={() => handleStatus(application._id, 'Accepted')}>
               Accept
