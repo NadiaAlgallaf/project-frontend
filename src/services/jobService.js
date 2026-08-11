@@ -1,7 +1,9 @@
 import api from './api'
 
-async function getAllJobs() {
-  const response = await api.get('/jobs')
+async function getAllJobs(filters = {}) {
+  const response = await api.get('/jobs', {
+    params: filters
+  })
   return response.data.jobs
 }
 
