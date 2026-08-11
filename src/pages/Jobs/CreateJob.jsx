@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { createJob } from "../../services/jobService.js";
+import { JOB_CATEGORIES, EMPLOYMENT_TYPES } from "../../constants/jobOptions.js";
 
 function CreateJob() {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ function CreateJob() {
     jobTitle: "",
     companyName: "",
     jobDescription: "",
+    jobCategory:"",
     jobType: "",
     location: "",
     salary: "",
@@ -80,18 +82,34 @@ function CreateJob() {
 
         <br />
 
-        <label>Job Type: </label>
-        <select
-          name="jobType"
-          value={formData.jobType}
-          onChange={handleChange}
-        >
-          <option value="">Select Job Type</option>
-          <option value="Full-time">Full-time</option>
-          <option value="Part-time">Part-time</option>
-          <option value="Contract">Contract</option>
-          <option value="Remote">Remote</option>
-        </select>
+       <label>Job Category: </label>
+<select
+  name="jobCategory"
+  value={formData.jobCategory}
+  onChange={handleChange}
+>
+  <option value="">Select Job Category</option>
+
+  {JOB_CATEGORIES.map((category) => (
+    <option key={category} value={category}>
+      {category}
+    </option>
+  ))}
+</select>
+
+    <select
+  name="jobType"
+  value={formData.jobType}
+  onChange={handleChange}
+>
+  <option value="">Select Employment Type</option>
+
+  {EMPLOYMENT_TYPES.map((type) => (
+    <option key={type} value={type}>
+      {type}
+    </option>
+  ))}
+</select> 
 
         <br />
 
