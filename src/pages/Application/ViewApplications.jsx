@@ -44,6 +44,7 @@ function ViewApplications() {
     }
     try {
       await updateInterviewDate(applicationId, interviewDate)
+      loadApplications()
       alert('Interview date saved')
     } catch (error) {
       console.log(error)

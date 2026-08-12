@@ -53,7 +53,7 @@ function CreateJob() {
     <div className="container">
       <h1>Create Job</h1>
 
-      {error && <p className="text-danger">{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -182,9 +182,7 @@ function CreateJob() {
           />
         </div>
 
-        <button type="submit" className="btn btn-primary">
-          Create Job
-        </button>
+        <button type="submit">Create Job</button>
       </form>
     </div>
   )
