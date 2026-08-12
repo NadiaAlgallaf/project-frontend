@@ -13,6 +13,24 @@
 .career-navbar a {
   color: white;
 }
+.signin-btn,
+.signout-btn {
+  background-color: #6f67d8 !important;
+  color: white !important;
+  border: 2px solid #6f67d8 !important;
+  padding: 7px 16px;
+  border-radius: 7px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signin-btn:hover,
+.signout-btn:hover {
+  background-color: #5e56c7 !important;
+  border-color: #5e56c7 !important;
+  color: white !important;
+}
 
 .hero-section {
   min-height: 620px;

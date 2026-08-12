@@ -45,7 +45,7 @@ function Navbar() {
                 </>
               )}
 
-              <button className="btn btn-outline-primary" onClick={logout}>
+              <button className="signout-btn" onClick={logout}>
                 Sign Out
               </button>
             </>
@@ -55,7 +55,7 @@ function Navbar() {
                 Sign Up
               </Link>
 
-              <Link className="btn btn-primary" to="/sign-in">
+              <Link className="signin-btn" to="/sign-in">
                 Sign In
               </Link>
             </>
