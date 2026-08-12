@@ -14,6 +14,9 @@ function CreateJob() {
     jobDescription: '',
     jobCategory: '',
     jobType: '',
+    requirements: "",
+    education: "",
+    experience: "",
     location: '',
     salary: ''
   })
@@ -41,7 +44,7 @@ function CreateJob() {
 
       setError(
         error?.response?.data?.message ||
-          'Unable to create job. Please try again.'
+        'Unable to create job. Please try again.'
       )
     }
   }
@@ -84,6 +87,42 @@ function CreateJob() {
             onChange={handleChange}
           />
         </div>
+
+        <label className="form-label">Requirements:</label>
+
+        <textarea
+          className="form-control"
+          name="requirements"
+          value={formData.requirements}
+          onChange={handleChange}
+          required
+        />
+
+        <br />
+
+        <label className="form-label">Education:</label>
+
+        <input
+          className="form-control"
+          name="education"
+          value={formData.education}
+          onChange={handleChange}
+          required
+        />
+
+        <br />
+
+        <label className="form-label">Experience:</label>
+
+        <input
+          className="form-control"
+          name="experience"
+          value={formData.experience}
+          onChange={handleChange}
+          required
+        />
+
+        <br />
 
         <div className="mb-3">
           <label className="form-label">Job Category</label>

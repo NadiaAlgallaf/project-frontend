@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router'
 import { signUp } from '../services/authService'
 
+
 function Signup() {
   const navigate = useNavigate()
 
@@ -74,75 +75,16 @@ function Signup() {
     }
   }
 
- function isFormInvalid() {
-  const basicFieldsInvalid = !(
-    firstName &&
-    lastName &&
-    email &&
-    password &&
-    passwordConf &&
-    role &&
-    password === passwordConf
-  );
-
-  if (basicFieldsInvalid) {
-    return true;
-  }
-
-  if (role === "Employer" && !companyLogo) {
-    return true;
-  }
-
-  return false;
-}
-  return (
-    <main>
-      <h1>Sign Up</h1>
-
-      {error && <p className="error">{error}</p>}
-
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="firstName">First Name: </label>
-
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            value={firstName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="lastName">Last Name: </label>
-
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={lastName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email">Email: </label>
-
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div>
-          <label htmlFor="phone">Phone: </label>
+  function isFormInvalid() {
+    return !(
+      firstName &&
+      lastName &&
+      email &&
+      password &&
+      passwordConf &&
+      role &&
+      password === passwordConf
+    )
 
     if (basicFieldsInvalid) {
       return true
