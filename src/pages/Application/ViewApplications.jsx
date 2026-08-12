@@ -45,6 +45,7 @@ function ViewApplications() {
     try {
       await updateInterviewDate(applicationId, interviewDate)
       alert('Interview date saved')
+      loadApplications()
     } catch (error) {
       console.log(error)
     }
@@ -96,7 +97,25 @@ function ViewApplications() {
               <p>
                 <strong>Status:</strong> {application.status}
               </p>
+              {application.interviewDate && (
+                <div className="mb-3">
+                  <p>
+                    <strong>Interview Date:</strong>{' '}
+                    {new Date(application.interviewDate).toLocaleDateString()}
+                  </p>
 
+                  <p>
+                    <strong>Interview Time:</strong>{' '}
+                    {new Date(application.interviewDate).toLocaleTimeString(
+                      [],
+                      {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      }
+                    )}
+                  </p>
+                </div>
+              )}
               <p>
                 <strong>Resume:</strong>{' '}
                 <a
