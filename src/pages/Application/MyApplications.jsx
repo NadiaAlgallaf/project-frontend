@@ -46,36 +46,50 @@ function MyApplications() {
   }
 
   return (
-    <main>
-      <h1>My Applications</h1>
+    <main className="container mt-4">
+      <h1 className="mb-4">My Applications</h1>
 
       {applications.map((application) => (
-        <div key={application._id}>
-          <h2>{application.job.jobTitle}</h2>
+        <div className="card mb-3" key={application._id}>
+          <div className="card-body">
+            <h2 className="card-title">{application.job.jobTitle}</h2>
 
-          <p>Company: {application.job.companyName}</p>
-
-          <p>Status: {application.status}</p>
-
-          <p>Location: {application.job.location}</p>
-
-          <div>
             <p>
-              Interview Date:{' '}
-              {new Date(application.interviewDate).toLocaleDateString()}
+              <strong>Company:</strong> {application.job.companyName}
             </p>
+
             <p>
-              Interview Time:{' '}
-              {new Date(application.interviewDate).toLocaleTimeString([], {
-                hour: '2-digit',
-                minute: '2-digit'
-              })}
+              <strong>Status:</strong> {application.status}
             </p>
+
+            <p>
+              <strong>Location:</strong> {application.job.location}
+            </p>
+
+            {application.interviewDate && (
+              <div className="mb-3">
+                <p>
+                  <strong>Interview Date:</strong>{' '}
+                  {new Date(application.interviewDate).toLocaleDateString()}
+                </p>
+
+                <p>
+                  <strong>Interview Time:</strong>{' '}
+                  {new Date(application.interviewDate).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                  })}
+                </p>
+              </div>
+            )}
+
+            <button
+              className="btn btn-outline-danger"
+              onClick={() => handleWithdraw(application._id)}
+            >
+              Withdraw
+            </button>
           </div>
-
-          <button onClick={() => handleWithdraw(application._id)}>
-            Withdraw
-          </button>
         </div>
       ))}
     </main>

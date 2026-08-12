@@ -36,25 +36,40 @@ function MyJobs() {
   }
 
   return (
-    <main>
-      <h1>My Jobs</h1>
+    <main className="container">
+      <h1 className="mb-4">My Jobs</h1>
 
       {jobs.map((job) => (
-        <div key={job._id}>
-          <h2>{job.jobTitle}</h2>
+        <div className="card mb-3" key={job._id}>
+          <div className="card-body">
+            <h2 className="card-title">{job.jobTitle}</h2>
 
-          <p>{job.companyName}</p>
-          <p>{job.location}</p>
-          <p>{job.jobType}</p>
-          <p>Applicants: {job.applicationCount}</p>
+            <p className="card-text">{job.companyName}</p>
+            <p className="card-text">Location: {job.location}</p>
+            <p className="card-text">Type: {job.jobType}</p>
+            <p className="card-text">Applicants: {job.applicationCount}</p>
 
-          <button onClick={() => navigate(`/jobs/${job._id}/applications`)}>
-            View Applications
-          </button>
+            <button
+              className="btn btn-primary me-2"
+              onClick={() => navigate(`/jobs/${job._id}/applications`)}
+            >
+              View Applications
+            </button>
 
-          <Link to={`/jobs/${job._id}`}>View</Link>
+            <Link
+              className="btn btn-outline-primary me-2"
+              to={`/jobs/${job._id}`}
+            >
+              View
+            </Link>
 
-          <Link to={`/jobs/${job._id}/edit`}>Edit</Link>
+            <Link
+              className="btn btn-outline-secondary"
+              to={`/jobs/${job._id}/edit`}
+            >
+              Edit
+            </Link>
+          </div>
         </div>
       ))}
     </main>
