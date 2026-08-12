@@ -106,23 +106,24 @@ function JobDetails() {
             <strong>Salary:</strong> {job.salary}
           </p>
 
-          <hr />
+         
+          <p>
+           <strong>Desicription:</strong>{job.jobDescription}
+            </p> 
 
-          <h3>Description</h3>
-          <p>{job.jobDescription}</p>
+          <p>
+            <strong>Requirements:</strong> {job.requirements}
+          </p>
 
-          <hr />
+          <p>
+            <strong>Education:</strong> {job.education}
+          </p>
 
-          <h3>Requirements</h3>
-          <p>{job.requirements}</p>
+          <p>
+            <strong>Experience:</strong> {job.experience}
+          </p>
 
-          <h3>Education</h3>
-          <p>{job.education}</p>
-
-          <h3>Experience</h3>
-          <p>{job.experience}</p>
-
-          <hr />
+  
 
           {user?.role === 'JobSeeker' && (
             <button className="btn btn-primary me-2" onClick={handleApply}>
