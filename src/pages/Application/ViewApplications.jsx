@@ -75,58 +75,85 @@ function ViewApplications() {
   }
 
   return (
-    <div>
-      <h1>Applications</h1>
+    <main className="container mt-4">
+      <h1 className="mb-4">Applications</h1>
 
       {applications.length === 0 ? (
         <p>No applications yet</p>
       ) : (
         applications.map((application) => (
-          <div key={application._id}>
-            <h3>
-              {application.applicant.firstName} {application.applicant.lastName}
-            </h3>
-            <p>Email: {application.applicant.email}</p>
-            <p>Status: {application.status}</p>
-            <p>
-              Resume:{' '}
-              <a href={application.resumeUrl} target="_blank">
-                View Resume
-              </a>
-            </p>
+          <div className="card mb-3" key={application._id}>
+            <div className="card-body">
+              <h3 className="card-title">
+                {application.applicant.firstName}{' '}
+                {application.applicant.lastName}
+              </h3>
 
-            <button onClick={() => handleStatus(application._id, 'Interview')}>
-              Interview
-            </button>
+              <p>
+                <strong>Email:</strong> {application.applicant.email}
+              </p>
 
-            {application.status === 'Interview' && (
-              <div>
-                <label>Interview Date:</label>
+              <p>
+                <strong>Status:</strong> {application.status}
+              </p>
 
-                <input
-                  type="datetime-local"
-                  min={getCurrentDateTime()}
-                  value={interviewDate}
-                  onChange={(event) => setInterviewDate(event.target.value)}
-                />
+              <p>
+                <strong>Resume:</strong>{' '}
+                <a
+                  href={application.resumeUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  View Resume
+                </a>
+              </p>
 
-                <button onClick={() => handleInterviewDate(application._id)}>
-                  Save Date
-                </button>
-              </div>
-            )}
+              <button
+                className="btn btn-outline-primary me-2"
+                onClick={() => handleStatus(application._id, 'Interview')}
+              >
+                Interview
+              </button>
 
-            <button onClick={() => handleStatus(application._id, 'Accepted')}>
-              Accept
-            </button>
+              <button
+                className="btn btn-outline-success me-2"
+                onClick={() => handleStatus(application._id, 'Accepted')}
+              >
+                Accept
+              </button>
 
-            <button onClick={() => handleStatus(application._id, 'Rejected')}>
-              Reject
-            </button>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => handleStatus(application._id, 'Rejected')}
+              >
+                Reject
+              </button>
+
+              {application.status === 'Interview' && (
+                <div className="mt-3">
+                  <label className="form-label">Interview Date</label>
+
+                  <input
+                    className="form-control mb-2"
+                    type="datetime-local"
+                    min={getCurrentDateTime()}
+                    value={interviewDate}
+                    onChange={(event) => setInterviewDate(event.target.value)}
+                  />
+
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => handleInterviewDate(application._id)}
+                  >
+                    Save Date
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         ))
       )}
-    </div>
+    </main>
   )
 }
 

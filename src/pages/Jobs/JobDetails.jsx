@@ -59,57 +59,74 @@ function JobDetails() {
   }
 
   async function handleApply() {
-   const resumeUrl = window.prompt("please enter your resume URL")
-   if(!resumeUrl){
-    return
-   }
-    try{
-await createApplication(job._id, resumeUrl)
-alert("Application submitted successfully")
+    const resumeUrl = window.prompt('please enter your resume URL')
+    if (!resumeUrl) {
+      return
+    }
+    try {
+      await createApplication(job._id, resumeUrl)
+      alert('Application submitted successfully')
 
-navigate('/my-applications')
+      navigate('/my-applications')
+    } catch (error) {
+      console.log(error)
 
-  }catch(error){
-    console.log(error)
-
-    setError(
-      error?.response?.data?.message || 
-      "Unable to submit application."
-    )
+      setError(
+        error?.response?.data?.message || 'Unable to submit application.'
+      )
+    }
   }
-}
 
   const isOwner =
     user && job.createdBy && job.createdBy.toString() === user._id.toString()
 
   return (
-    <div>
-      <h1>{job.jobTitle}</h1>
+    <div className="container mt-4">
+      <div className="card">
+        <div className="card-body">
+          <h1 className="card-title">{job.jobTitle}</h1>
 
-      <p>Company: {job.companyName}</p>
+          <p>
+            <strong>Company:</strong> {job.companyName}
+          </p>
 
-      <p>Location: {job.location}</p>
+          <p>
+            <strong>Location:</strong> {job.location}
+          </p>
 
-      <p>Type: {job.jobType}</p>
+          <p>
+            <strong>Type:</strong> {job.jobType}
+          </p>
 
-      <p>Salary: {job.salary}</p>
+          <p>
+            <strong>Salary:</strong> {job.salary}
+          </p>
 
-      <h3>Description</h3>
+          <h3>Description</h3>
+          <p>{job.jobDescription}</p>
 
-      <p>{job.jobDescription}</p>
-      
-{user?.role === "JobSeeker" && (
-  <button onClick={handleApply}> Apply </button>
-)}
-      
+          {user?.role === 'JobSeeker' && (
+            <button className="btn btn-primary me-2" onClick={handleApply}>
+              Apply
+            </button>
+          )}
 
-      {isOwner && (
-        <div>
-          <Link to={`/jobs/${job._id}/edit`}> Edit </Link>
+          {isOwner && (
+            <div className="mt-3">
+              <Link
+                className="btn btn-outline-primary me-2"
+                to={`/jobs/${job._id}/edit`}
+              >
+                Edit
+              </Link>
 
-          <button onClick={handleDelete}> Delete </button>
+              <button className="btn btn-outline-danger" onClick={handleDelete}>
+                Delete
+              </button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   )
 }
