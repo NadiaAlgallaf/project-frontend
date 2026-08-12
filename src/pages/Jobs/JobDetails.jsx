@@ -60,11 +60,14 @@ function JobDetails() {
 
   async function handleApply() {
     const resumeUrl = window.prompt('please enter your resume URL')
+
     if (!resumeUrl) {
       return
     }
+
     try {
       await createApplication(job._id, resumeUrl)
+
       alert('Application submitted successfully')
 
       navigate('/my-applications')
@@ -84,6 +87,7 @@ function JobDetails() {
     <div className="container mt-4">
       <div className="card">
         <div className="card-body">
+
           <h1 className="card-title">{job.jobTitle}</h1>
 
           <p>
@@ -102,8 +106,23 @@ function JobDetails() {
             <strong>Salary:</strong> {job.salary}
           </p>
 
+          <hr />
+
           <h3>Description</h3>
           <p>{job.jobDescription}</p>
+
+          <hr />
+
+          <h3>Requirements</h3>
+          <p>{job.requirements}</p>
+
+          <h3>Education</h3>
+          <p>{job.education}</p>
+
+          <h3>Experience</h3>
+          <p>{job.experience}</p>
+
+          <hr />
 
           {user?.role === 'JobSeeker' && (
             <button className="btn btn-primary me-2" onClick={handleApply}>
@@ -120,11 +139,15 @@ function JobDetails() {
                 Edit
               </Link>
 
-              <button className="btn btn-outline-danger" onClick={handleDelete}>
+              <button
+                className="btn btn-outline-danger"
+                onClick={handleDelete}
+              >
                 Delete
               </button>
             </div>
           )}
+
         </div>
       </div>
     </div>
