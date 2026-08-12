@@ -2,3 +2,14 @@
   width: 150px;
   height: auto;
 }
+.career-navbar {
+  background-color: #6c65ef;
+}
+.career-navbar button {
+  background-color: white;
+  color: #4f46e5;
+  border: none;
+}
+.career-navbar a {
+  color: white;
+}
