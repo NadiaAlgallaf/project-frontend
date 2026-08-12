@@ -4,14 +4,15 @@ import logo from '../assets/logo.png'
 
 function Navbar() {
   const { logout, user } = useAuth()
+
   return (
-    <nav className="navbar navbar-expand-lg career-navbar">
-      <div className="container">
+    <nav className="navbar bg-white shadow-sm py-1">
+      <div className="container-fluid px-3">
         <Link className="navbar-brand" to="/">
           <img src={logo} alt="CareerConnect Logo" className="navbar-logo" />
         </Link>
 
-        <div className="navbar-nav">
+        <div className="navbar-nav flex-row align-items-center gap-3">
           <Link className="nav-link" to="/">
             Home
           </Link>
@@ -54,7 +55,7 @@ function Navbar() {
                 Sign Up
               </Link>
 
-              <Link className="nav-link" to="/sign-in">
+              <Link className="btn btn-primary" to="/sign-in">
                 Sign In
               </Link>
             </>
