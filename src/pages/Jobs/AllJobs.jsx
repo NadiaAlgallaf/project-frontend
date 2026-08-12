@@ -89,101 +89,140 @@ function AllJobs() {
   }
 
   return (
-    <div className="container mt-5">
-      <h1 className="mb-4">All Jobs</h1>
+    <main className="jobs-page">
+      <div className="container">
+        <div className="jobs-header">
+          <p className="jobs-small-title">FIND YOUR NEXT OPPORTUNITY</p>
 
-      <form onSubmit={handleSearch} className="mb-5">
-        <div className="mb-3">
-          <label className="form-label">Job Category</label>
+          <h1>Explore Jobs</h1>
 
-          <select
-            className="form-select"
-            name="jobCategory"
-            value={filters.jobCategory}
-            onChange={handleFilterChange}
-          >
-            <option value="">All Categories</option>
-
-            {JOB_CATEGORIES.map((category) => (
-              <option key={category} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
+          <p>
+            Browse available positions and find an opportunity that matches your
+            goals.
+          </p>
         </div>
 
-        <div className="mb-3">
-          <label className="form-label">Employment Type</label>
+        <form onSubmit={handleSearch} className="jobs-filter-card">
+          <div className="row g-3">
+            <div className="col-md-5">
+              <label className="form-label">Job Category</label>
 
-          <select
-            className="form-select"
-            name="jobType"
-            value={filters.jobType}
-            onChange={handleFilterChange}
-          >
-            <option value="">All Employment Types</option>
+              <select
+                className="form-select"
+                name="jobCategory"
+                value={filters.jobCategory}
+                onChange={handleFilterChange}
+              >
+                <option value="">All Categories</option>
 
-            {EMPLOYMENT_TYPES.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        </div>
+                {JOB_CATEGORIES.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-        <button type="submit" className="btn btn-primary me-2">
-          Search Jobs
-        </button>
+            <div className="col-md-5">
+              <label className="form-label">Employment Type</label>
 
-        <button
-          type="button"
-          className="btn btn-outline-secondary"
-          onClick={handleClearFilters}
-        >
-          Clear Filters
-        </button>
-      </form>
+              <select
+                className="form-select"
+                name="jobType"
+                value={filters.jobType}
+                onChange={handleFilterChange}
+              >
+                <option value="">All Employment Types</option>
 
-      {jobs.length === 0 ? (
-        <p>No jobs found.</p>
-      ) : (
-        jobs.map((job) => (
-          <div className="card mb-3" key={job._id}>
-            <div className="card-body">
-              {job.createdBy?.companyLogo && (
-                <img
-                  src={job.createdBy.companyLogo}
-                  alt={`${job.companyName} logo`}
-                  width="80"
-                  height="80"
-                  className="mb-3 rounded"
-                />
-              )}
+                {EMPLOYMENT_TYPES.map((type) => (
+                  <option key={type} value={type}>
+                    {type}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-              <h2 className="card-title">{job.jobTitle}</h2>
-
-              <p className="card-text">{job.companyName}</p>
-
-              <div className="mb-3">
-                <span className="badge text-bg-light me-2">
-                  {job.jobCategory}
-                </span>
-
-                <span className="badge text-bg-primary">{job.jobType}</span>
-              </div>
-
-              <p className="card-text">{job.location}</p>
-
-              <p className="card-text">{job.salary}</p>
-
-              <Link to={`/jobs/${job._id}`} className="btn btn-outline-primary">
-                View Details
-              </Link>
+            <div className="col-md-2 d-flex align-items-end">
+              <button type="submit" className="btn btn-primary w-100">
+                Search
+              </button>
             </div>
           </div>
-        ))
-      )}
-    </div>
+
+          <button
+            type="button"
+            className="clear-filter-btn"
+            onClick={handleClearFilters}
+          >
+            Clear Filters
+          </button>
+        </form>
+
+        <div className="jobs-results-header">
+          <h4>Available Jobs</h4>
+          <span>{jobs.length} jobs found</span>
+        </div>
+
+        {jobs.length === 0 ? (
+          <div className="no-jobs-card">
+            <i className="bi bi-search"></i>
+            <h4>No jobs found</h4>
+            <p>Try changing your filters to see more opportunities.</p>
+          </div>
+        ) : (
+          jobs.map((job) => (
+            <div className="job-card" key={job._id}>
+              <div className="job-card-body">
+                <div className="job-main-content">
+                  {job.createdBy?.companyLogo && (
+                    <img
+                      src={job.createdBy.companyLogo}
+                      alt={`${job.companyName} logo`}
+                      className="job-company-logo"
+                    />
+                  )}
+
+                  <div>
+                    <h2>{job.jobTitle}</h2>
+
+                    <p className="job-company-name">{job.companyName}</p>
+
+                    <div className="job-badges">
+                      <span className="badge text-bg-light">
+                        {job.jobCategory}
+                      </span>
+
+                      <span className="badge job-type-badge">
+                        {job.jobType}
+                      </span>
+                    </div>
+
+                    <div className="job-info">
+                      <span>
+                        <i className="bi bi-geo-alt"></i>
+                        {job.location}
+                      </span>
+
+                      <span>
+                        <i className="bi bi-cash"></i>
+                        {job.salary} BHD
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <Link
+                  to={`/jobs/${job._id}`}
+                  className="btn btn-outline-primary job-details-btn"
+                >
+                  View Details
+                </Link>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
+    </main>
   )
 }
 
