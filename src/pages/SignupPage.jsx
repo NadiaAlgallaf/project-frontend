@@ -74,25 +74,26 @@ function Signup() {
     }
   }
 
-  function isFormInvalid() {
-    return !(
-      firstName &&
-      lastName &&
-      email &&
-      password &&
-      passwordConf &&
-      role &&
-      password === passwordConf
-    );
-  
-if (basicFieldsInvalid){
-  return true
-}
+ function isFormInvalid() {
+  const basicFieldsInvalid = !(
+    firstName &&
+    lastName &&
+    email &&
+    password &&
+    passwordConf &&
+    role &&
+    password === passwordConf
+  );
 
-if ( role === "Employer" && !companyLogo){
-  return true;
-}
-return false 
+  if (basicFieldsInvalid) {
+    return true;
+  }
+
+  if (role === "Employer" && !companyLogo) {
+    return true;
+  }
+
+  return false;
 }
   return (
     <main>
